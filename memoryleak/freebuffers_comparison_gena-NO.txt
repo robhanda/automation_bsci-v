@@ -1,0 +1,5 @@
+buffer_size    buffer_initial    buffer_final    difference        result
+ 193                77652                      77656          -4     memory leak
+ 88                193406                      193414          -8     memory leak
+ 20                176033                      176037          -4     memory leak
+ 9                9594                      9598          -4     memory leak

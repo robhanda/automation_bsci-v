@@ -1,0 +1,75 @@
+buffer_size	buffer_initial		buffer_final	difference	result
+10			3		10		-7		memory leak
+1682			299		1682		-1383		memory leak
+489			497		489		8		memory leak
+70			71		70		1		stable
+16			14		16		-2		stable
+84			78		84		-6		memory leak
+898			926		898		28		memory leak
+240			235		240		-5		memory leak
+4			2		4		-2		stable
+2			1		2		-1		stable
+15			9		15		-6		memory leak
+256			264		256		8		memory leak
+128			132		128		4		memory leak
+23			24		23		1		stable
+1			0		1		-1		stable
+19			12		19		-7		memory leak
+71			78		71		7		memory leak
+2			0		2		-2		stable
+8			5		8		-3		memory leak
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+256			264		256		8		memory leak
+128			132		128		4		memory leak
+10			6		10		-4		memory leak
+13			12		13		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+74			78		74		4		memory leak
+4			0		4		-4		memory leak
+14			5		14		-9		memory leak
+4			0		4		-4		memory leak
+3			0		3		-3		memory leak
+3			0		3		-3		memory leak
+256			264		256		8		memory leak
+128			132		128		4		memory leak
+9			0		9		-9		memory leak
+10			11		10		1		stable
+10			11		10		1		stable
+3			0		3		-3		memory leak
+3			0		3		-3		memory leak
+3			0		3		-3		memory leak
+3			0		3		-3		memory leak
+3			0		3		-3		memory leak
+63			77		63		14		memory leak
+1			0		1		-1		stable
+256			264		256		8		memory leak
+129			132		129		3		memory leak
+1			0		1		-1		stable
+10			6		10		-4		memory leak
+16			12		16		-4		memory leak
+1			0		1		-1		stable
+71			78		71		7		memory leak
+1			0		1		-1		stable
+7			5		7		-2		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+256			264		256		8		memory leak
+128			132		128		4		memory leak
+16			18		16		2		stable
+1			0		1		-1		stable
+8			9		8		1		stable
+8			9		8		1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+1			0		1		-1		stable
+56			63		56		7		memory leak
+256			264		256		8		memory leak
+128			132		128		4		memory leak

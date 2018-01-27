@@ -1,0 +1,2 @@
+LT_STATUS_ACK  idle 10  LAPD0 running OM0 running BTS0 running PCUMS0 running ELG0 running LAPD1 running OM1 running BTS1 running PCUMS1 running ELG1 running
+GEMU>

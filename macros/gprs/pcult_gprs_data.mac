@@ -1,0 +1,140 @@
+$dt$
+msapp99 elg_open
+0			- See gmms.asn, msapp99.asn
+4			- ms in burst
+28			- burst count
+2000			- burst interval msec
+1x			- primaries per ms
+0			- secondaries per primary
+y1			- give attach type
+gprs-only		 - attach type
+n1			- give ready timer
+n1			- give ms network capab
+n1			- give drx profile set
+y1			- give ms-ra-access-capa-set
+y1			 - give first MS RAC, up to 20
+1			  - profile weight
+y1			  - give reduced plain format: AccessTechnologyType
+gsm-900-E		   - access-technology-type
+class-3			   - rf-power-capab
+n1			   - give a5 bits
+available		    - a1 bit
+early-classmark-not-supported - es-ind
+ps-capability-not-present   - ps
+no-vgcs-wanted		   - vgcs
+no-vbs-wanted		   - vbs
+y1			   - give multislot capability
+n1			    - give hscsd-multislot-class
+y1			    - give gprs-multislot-class
+1		     - gprs-multislot-class
+n1			    - give gprs-extended-dynamic-support
+n1			    - give ms-measurement-capab
+n1			    - give ecsd-multislot-class
+n1			    - give egprs-multislot-class
+y1			    - give egprs-extended-dynamic-support
+implemented		     - egprs-extended-dynamic-support
+n1			    - give dtm-support
+y1			 - no psk8-power-capab
+e1
+compact-implemented 	 - compact-capab
+rel99-onwards		 - revision-level
+umts-fdd-not-support	 - umts-fdd-capab
+umts-tdd-not-support	 - umts-3-84-Mcps-tdd-capab
+cdma2000-not-support	 - cdma2000-capab
+umts-tdd-not-support     - umts-1-28-Mcps-tdd-capab
+geran-feature-package-not-support - geran-feature-package-1
+n1			 - no extended dtm
+modulation-based-ms-class-not-supported - modulation-based-support
+y1			 - high-multislot-capability
+0
+geran-iu-mode-not-supported - geran-iu-mode-capability
+n1			 - multislot-power-profile
+multi-tbf-support-no     - rel6 multitbf
+darp-not-supported       - rel6 darp
+extended-ctrl-msg-segmentation-support-no  - rel6 rlc_mac segmenting
+dtm-enhancements-capability-support-no  - rel6 dtm_enhancements
+y                                                             
+ext-dtm-multislotclass-bits-000                               
+n                                                             
+ms-does-not-support-ps-handover                               
+ms-does-not-support-dtm-handover                              
+y ; downlink-dual-carrier (if y, give multislot reduction and 
+0                                                             
+0                                                             
+ms-does-not-support-flexible-timeslot-assignment              
+ms-does-not-support-geran-or-utran-to-gan-ps-handover         
+ms-does-not-support-rlc-non-persistent-mode                   
+ms-does-not-support-reduced-tti-and-fast-ack-nack-report      
+ms-does-not-support-either-egprs2a-or-egprs2b-in-uplink       
+ms-does-not-support-either-egprs2a-or-egprs2b-in-downlink
+0                       - e-utra-fdd-support, range from 0 to 1
+0                       - e-utra-tdd-support, range from 0 to 1
+0                       - geran-to-e-utra-support-in-geran-packet-transfer-mode, range from 0 to 3
+0                       - priority-based-reselection-support, range from 0 to 1
+n1			- give first additional-access-technologies
+n1		         - no full octet format of this MS RAC included here
+n1			- no more MS RAC elems
+y1           		- dgs profile set
+n1            		 - idle profile
+n1            		 - icmp profile
+n1			  - WWW profile
+n1			  - STREAMING UDP profile
+n1			  - STREAMING TCP profile
+n1			  - EMAIL POP3 profile
+n1			  - MMS profile
+y1	 		  - OLD ELG TEST DATAGEN (not to be used with others)
+1            		  - profile weight
+y1             		  - first OLD ELG TEST DATAGEN elem
+1               	    - weight  
+ipv4            	    - pdp type. next apn
+nokia.com
+high-priority	   	    - precedence
+conversational-class	    - traffic class
+no-delivery-order	    - delivery order
+no-detect		    - delivery or erroneous sdus
+sdu-1510		    - max sdu size
+kbps-80			    - max ul bitrate
+kbps-80			    - max dl bitrate
+five-minus-three	    - residual ber
+one-minus-four		    - sdu error ratio
+delay-110ms		    - transfer delay
+kbps-40			    - guarantied ul bitrate (coded)
+kbps-40			    - guarantied dl bitrate (coded)
+priority-level-1            - traffic handling priotity
+n1		            - Rel5 QoS
+n1		            - Rel7 QoS
+t			    - collect statistics
+f	  --  generator not in rnc 
+n1	  --  no icmp datagen
+y1	  --  yes udp datagen . next primary target address
+10.8.205.25
+1		-- target address count
+23001		-- target port
+y1		-- first ul packet profile
+450	 -- packet length
+641	 -- packet delay 
+n1		-- no more ul profiles
+1	-- ul packets in a burst
+y1              -- first dl packet profile
+450	 -- packet length	
+0	 -- packet delay 	
+n1		-- no more dl profiles	
+1	-- dl packets in a burst
+y1		-- give Datagen Controls
+y1		 -- give max waiting time (interval)
+642	   -- 5000 ms
+n1		 -- no packet count limit
+t		 -- resend as soon as all expected packets have been received 
+x  	  -- no more datagen elems, stop asking
+.
+ma E
+
+$detach$
+msapp99 elg_detach
+
+1	-- ms in burst
+2000	-- burst delay
+x       -- skip DETACH IEs, meaningfull values will be set by ELG
+.
+macro EndAndRun
+

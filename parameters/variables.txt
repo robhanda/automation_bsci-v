@@ -1,0 +1,9 @@
+ip=10.253.192.54
+number of machines=2
+interface=PABISE
+gemu_path=/home/gemu
+BTS type=40
+number of bcf per machine=2
+elgprocess=gprs
+#enter elgprocess as gprs or mixed
+

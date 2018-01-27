@@ -1,0 +1,2413 @@
+# *********************************************************************
+#
+#  Copyright (c) Nokia Siemens Networks 2011. All rights reserved.
+#
+# *********************************************************************/
+
+$erp$
+elgpktreport
+ma E
+
+$erd$
+elgpdpreport
+ma E
+
+$elgpdpreport$
+mspdp ms_elg_report
+0
+10
+0
+
+ma E
+
+$elgpktreport$
+mspdp ms_elg_pkt_report
+0
+10
+0
+
+ma E
+
+$er$
+msapp99 elg_report
+1
+.
+ma E
+
+$elgreport$
+msapp99 elg_report
+1
+.
+ma E
+
+# elg_report_printf is identical to elg_report
+# except it uses standard printf() function for
+# output instead of CVOPS woutput(), thus overriding
+# possible log file and echo off settings.
+$per$
+msapp99 elg_report_printf
+1
+.
+ma E
+
+$elgsus$
+msapp99 elg_suspend
+
+100  		;; percent
+5    		;; spreading time
+5    		;; duration of suspend
+2    		;; total suspend count for a ms
+8    		;; time to next suspend after resume
+routing-update  ;; resume method
+
+ma E
+
+$ms1att_v2$
+msapp99 ms_attach
+1
+y1
+y1
+available
+mt-ptp-sms-supported
+mt-ptp-sms-supported
+default-alphabet-preferred
+i00
+y1
+me-does-not-support-solsa
+y1
+supporting-r99-or-later
+y1
+bss-packet-flow-supported
+y1
+available
+y1
+available
+y1
+not-available
+y1
+not-available
+y1
+not-available
+y1
+not-available
+y1
+lcs-va-locreq-notif-supported
+n1
+y1
+gprs-only
+y1
+7
+y1
+50
+T
+3
+y1
+6
+n1
+y1
+\x42F4
+\x50
+1
+1
+y1
+y1
+y1
+gsm-900-R
+x                       ; no dgs profile set, stop asking
+class-2
+
+y1
+available
+available
+not-available
+not-available
+not-available
+not-available
+not-available
+early-classmark-not-supported
+ps-capability-not-present
+no-vgcs-wanted
+no-vbs-wanted
+y1
+n1
+y1
+10
+n1
+y1
+v-5-8-ts
+v-2-8-ts
+n1
+y1
+6
+n1
+n1
+y1
+e1
+compact-not-implemented
+rel99-onwards
+umts-fdd-support
+umts-tdd-support
+cdma2000-support
+umts-tdd-support
+geran-feature-package-supported
+n1
+modulation-based-ms-class-not-supported
+n1
+geran-iu-mode-not-supported
+n1
+multi-tbf-support
+darp-not-supported
+extended-ctrl-msg-segmentation-support-no
+dtm-enhancements-capability-support-no
+n
+ps-handover-capability-support-no
+dtm-handover-capability-support-no
+y
+dual-carrier-reduction-bits-010
+dl-dualcarrier-capability-support-no
+flex-timeslot-assignment-support-no
+gan-ps-handover-capability-support-no
+rlc-non-persistent-mode-support-no
+reduced-latency-egprs-capability-support
+n1
+n1
+n1
+n1
+y1
+two-secs
+20
+y1
+no-valid-tmsi-available
+y1
+follow-on-req-pending
+x
+
+ma E
+
+
+$elgsms$
+msapp99 elg_sms
+
+1				;; number of ms in burst
+1				;; burst interval msec
+100				;; percent of mobiles for SMS
+5				;; sms size
+international-number		;; destination sc, type of address
+isdn-telephony-numbering-plan	;; destination sc, numbering plan
+358405202000
+n				;; no dest ms address, use own address
+when-mt-received		;; SMS repeat strategy
+y				;; provide max waiting time
+3000				;; max waiting time in msec
+y				;; provide count of SMS per ms
+10				;; count of SMS per ms
+.
+ma E
+
+$elgstopsms$
+msapp99 elg_stop_sms
+
+.
+ma E
+
+$ed$
+elgdetach
+ma E
+
+$elgdetach$
+msapp99 elg_detach
+
+50	;; ms in burst
+40	;; burst delay
+x       ;; skip DETACH IEs, meaningful values will be set by ELG
+.
+macro EndAndRun
+
+$elgcup$
+msapp99 elg_cup
+
+100	; percentage of MS involved
+30	; cup delay in secs for each involved MS
+
+ma E
+
+$elgdea$
+msapp99 elg_deapdp
+
+50	; pdp in burst
+100	; burst delay
+
+macro EndAndRun
+
+$elg1_open$
+msapp99 elg_open
+0			; See gmms.asn, msapp99.asn
+1			; ms in burst
+1			; burst count
+50			; burst interval msec
+0			; primaries per ms
+0			; secondaries per primary
+n			; no attach type
+n			; no ready timer
+n			; no ms network capa
+n            		; no drx set
+n            		; no radio capa set
+x           		; no dgs profile set, stop asking
+.
+ma E
+
+$elg1_data$
+msapp99 elg_open
+0			; See gmms.asn, msapp99.asn
+1			; ms in burst
+10			; burst count
+50			; burst interval msec
+1			; primaries per ms
+1			; secondaries per primary
+n			; no attach type
+n			; no ready timer
+n			; no ms network capa
+n            		; no drx set
+n            		; no radio capa set
+y            		; dgs profile set
+y             		 ; idle profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first idle elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+low-priority 	  	    ; precedence
+background-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-3            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+n			   ; no more idle elems
+n			  ; no icmp profile
+n			  ; no www profile
+n			  ; no streaming udp profile
+n			  ; no streaming tcp profile
+n			  ; no email pop3 profile
+n			  ; no mms profile
+y	 ;; yes elg test datagen
+1            		  ; profile weight
+y              		  ; first datagen elem
+1               	    ; weight
+ipv4            	    ; pdp type. next apn
+nokia.com
+high-priority	   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+f	  ;;  generator not in rnc
+y	  ;; select icmp testdata
+10.10.10.10
+10	   ;; destination address count
+1000	   ;; ping size
+y          ;; give Datagen Controls
+y	   ;; give max waiting time (interval)
+1000	     ;; 1000 ms
+n	   ;; no packet count limit
+t	   ;; resend as soon as all expected packets have been received
+x  	  ;; no more datagen elems, stop asking
+.
+ma E
+
+$paopen_psk$
+msapp99 elg_open
+0                       ; See gmms.asn, msapp99.asn
+4                       ; ms in burst
+25                       ; burst count
+2000                    ; burst interval msec
+0                       ; primaries per ms
+0                       ; secondaries per primary
+y                       ; give attach type
+gprs-only                ; attach type
+y                       ; give ready timer
+two-secs                 ; timer unit
+20                       ; timer value
+y                       ; give ms network capab
+y                        ; give in plain format
+available                 ; gea-1
+mt-ptp-sms-supported      ; sm-capa-via-ded-ch
+mt-ptp-sms-supported      ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00                       ; screening-ind
+y                        ; give solsa
+me-does-not-support-solsa ; solsa
+y                        ; give revision level
+supporting-r99-or-later   ; revision level
+y                        ; give pfc feature mode
+1
+n                        ; gea2
+n                        ; gea3
+n                        ; gea4
+n                        ; gea5
+n                        ; gea6
+n                        ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n                       ; no octet format parameter for network capability
+y                       ; give drx profile set
+y                        ; give first DRX elem
+1                         ; profile weight
+3                        ; split-pg-cycle ;edrx value
+t                         ; split-on-ccch
+3                         ; non-drx-timer
+y                         ; give drx-cycle-len
+6                          ; drx cycle len
+y                        ; give second DRX elem
+2                         ; profile weight
+4                         ; split-pg-cycle ;edrx value
+f                         ; split-on-ccch
+0                         ; non-drx-timer
+n                         ; no drx-cycle-len
+n                        ; no more DRX elems
+y                       ; give ms-ra-access-capa-set
+y                        ; give first MS RAC, up to 20
+1                         ; profile weight
+y                         ; give reduced plain format: AccessTechnologyType
+gsm-900-R                  ; access-technology-type
+class-1                    ; rf-power-capab
+y                          ; give a5 bits
+available                   ; a1 bit
+not-available               ; a2 bit
+not-available               ; a3 bit
+not-available               ; a4 bit
+not-available               ; a5 bit
+not-available               ; a6 bit
+not-available               ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present      ; ps
+no-vgcs-wanted             ; vgcs
+no-vbs-wanted              ; vbs
+y                          ; give multislot capability
+n                           ; give hscsd-multislot-class
+y                           ; give gprs-multislot-class
+1                            ; gprs-multislot-class
+n
+n
+n
+y
+10
+n                           ;  egprs-extended-dynamic-support
+y                           ; dtm-support
+multislot-class-5-supported  ; dtm-gprs-multislot-class
+single-slot-dtm-not-supported ; single-slot-dtm-support
+y                            ; give dtm-egprs-multislot-class
+multislot-class-5-supported   ; multislot-class-5-supported
+y                           ; psk8-power-capab
+3                               ; psk8-power-capab
+1                               ; compact-capab
+1                               ; revision-level
+0                               ; umts-fdd-capab
+0                               ; umts-3-84-Mcps-tdd-capab
+0                               ; cdma2000-capab
+0                               ; umts-1-28-Mcps-tdd-capab
+1                               ; geran-feature-package-1
+x
+.
+ma E
+
+$paopen_multipsk$
+msapp99 elg_open
+0                       ; See gmms.asn, msapp99.asn
+1                      ; ms in burst
+1                       ; burst count
+1000                    ; burst interval msec
+0                       ; primaries per ms
+0                       ; secondaries per primary
+y                       ; give attach type
+gprs-only                ; attach type
+y                       ; give ready timer
+two-secs                 ; timer unit
+20                       ; timer value
+y                       ; give ms network capab
+y                        ; give in plain format
+available                 ; gea-1
+mt-ptp-sms-supported      ; sm-capa-via-ded-ch
+mt-ptp-sms-supported      ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00                       ; screening-ind
+y                        ; give solsa
+me-does-not-support-solsa ; solsa
+y                        ; give revision level
+supporting-r99-or-later   ; revision level
+n                        ; give pfc feature mode
+n                        ; gea2
+n                        ; gea3
+n                        ; gea4
+n                        ; gea5
+n                        ; gea6
+n                        ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n                       ; no octet format parameter for network capability
+y                       ; give drx profile set
+y                        ; give first DRX elem
+1                         ; profile weight
+10                        ; split-pg-cycle
+t                         ; split-on-ccch
+3                         ; non-drx-timer
+y                         ; give drx-cycle-len
+6                          ; drx cycle len
+y                        ; give second DRX elem
+2                         ; profile weight
+1                         ; split-pg-cycle
+f                         ; split-on-ccch
+0                         ; non-drx-timer
+n                         ; no drx-cycle-len
+n                        ; no more DRX elems
+y                       ; give ms-ra-access-capa-set
+y                        ; give first MS RAC, up to 20
+1                         ; profile weight
+y                         ; give reduced plain format: AccessTechnologyType
+gsm-900-R                  ; access-technology-type
+class-1                    ; rf-power-capab
+y                          ; give a5 bits
+available                   ; a1 bit
+not-available               ; a2 bit
+not-available               ; a3 bit
+not-available               ; a4 bit
+not-available               ; a5 bit
+not-available               ; a6 bit
+not-available               ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present      ; ps
+no-vgcs-wanted             ; vgcs
+no-vbs-wanted              ; vbs
+y                          ; give multislot capability
+n                           ; give hscsd-multislot-class
+y                           ; give gprs-multislot-class
+1                            ; gprs-multislot-class
+n
+n
+n
+y
+6
+n                           ;  egprs-extended-dynamic-support
+y                           ; dtm-support
+multislot-class-5-supported  ; dtm-gprs-multislot-class
+single-slot-dtm-not-supported ; single-slot-dtm-support
+y                            ; give dtm-egprs-multislot-class
+multislot-class-5-supported   ; multislot-class-5-supported
+y                           ; psk8-power-capab
+3                               ; psk8-power-capab
+1                               ; compact-capab
+1                               ; revision-level
+0                               ; umts-fdd-capab
+0                               ; umts-3-84-Mcps-tdd-capab
+0                               ; cdma2000-capab
+0                               ; umts-1-28-Mcps-tdd-capab
+1                               ; geran-feature-package-1
+n
+modulation-based-ms-class-not-supported
+n
+geran-iu-mode-not-supported
+n
+multi-tbf-support
+darp-not-supported
+extended-ctrl-msg-segmentation-support-no
+dtm-enhancements-capability-support-no
+n
+ps-handover-capability-support-no
+dtm-handover-capability-support-no
+n
+ms-does-not-support-flexible-timeslot-assignment
+ms-does-not-support-geran-or-utran-to-gan-ps-handover
+ms-does-not-support-rlc-non-persistent-mode
+ms-does-not-support-reduced-tti-and-fast-ack-nack-report
+ms-does-not-support-either-egprs2a-or-egprs2b-in-uplink
+ms-does-not-support-either-egprs2a-or-egprs2b-in-downlink
+e-utra-fdd-not-supported
+e-utra-tdd-not-supported
+none
+priority-based-cell-reselection-not-supported
+y
+y
+gsm-1800
+0
+e1
+y
+gsm-1900
+0
+e1
+n
+x
+.
+ma E
+
+$paopen_nccr$
+msapp99 elg_open
+0                       ; See gmms.asn, msapp99.asn
+1                       ; ms in burst
+1                       ; burst count
+1000                    ; burst interval msec
+0                       ; primaries per ms
+0                       ; secondaries per primary
+y                       ; give attach type
+gprs-only                ; attach type
+y                       ; give ready timer
+two-secs                 ; timer unit
+20                       ; timer value
+y                       ; give ms network capab
+y                        ; give in plain format
+available                 ; gea-1
+mt-ptp-sms-supported      ; sm-capa-via-ded-ch
+mt-ptp-sms-supported      ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00                       ; screening-ind
+y                        ; give solsa
+me-does-not-support-solsa ; solsa
+y                        ; give revision level
+supporting-r99-or-later   ; revision level
+n                        ; give pfc feature mode
+n                        ; gea2
+n                        ; gea3
+n                        ; gea4
+n                        ; gea5
+n                        ; gea6
+n                        ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n                       ; no octet format parameter for network capability
+y                       ; give drx profile set
+y                        ; give first DRX elem
+1                         ; profile weight
+10                        ; split-pg-cycle
+t                         ; split-on-ccch
+3                         ; non-drx-timer
+y                         ; give drx-cycle-len
+6                          ; drx cycle len
+y                        ; give second DRX elem
+2                         ; profile weight
+1                         ; split-pg-cycle
+f                         ; split-on-ccch
+0                         ; non-drx-timer
+n                         ; no drx-cycle-len
+n                        ; no more DRX elems
+y                       ; give ms-ra-access-capa-set
+y                        ; give first MS RAC, up to 20
+1                         ; profile weight
+y                         ; give reduced plain format: AccessTechnologyType
+gsm-900-R                  ; access-technology-type
+class-1                    ; rf-power-capab
+y                          ; give a5 bits
+available                   ; a1 bit
+not-available               ; a2 bit
+not-available               ; a3 bit
+not-available               ; a4 bit
+not-available               ; a5 bit
+not-available               ; a6 bit
+not-available               ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present      ; ps
+no-vgcs-wanted             ; vgcs
+no-vbs-wanted              ; vbs
+y                          ; give multislot capability
+n                           ; give hscsd-multislot-class
+y                           ; give gprs-multislot-class
+1                            ; gprs-multislot-class
+n
+n
+n
+y
+6
+n                           ;  egprs-extended-dynamic-support
+y                           ; dtm-support
+multislot-class-5-supported  ; dtm-gprs-multislot-class
+single-slot-dtm-not-supported ; single-slot-dtm-support
+y                            ; give dtm-egprs-multislot-class
+multislot-class-5-supported   ; multislot-class-5-supported
+y                           ; psk8-power-capab
+3                               ; psk8-power-capab
+1                               ; compact-capab
+1                               ; revision-level
+0                               ; umts-fdd-capab
+0                               ; umts-3-84-Mcps-tdd-capab
+0                               ; cdma2000-capab
+1                               ; umts-1-28-Mcps-tdd-capab
+1                               ; geran-feature-package-1
+n				; Extended DTM GPRS Multislot class
+0				; modulation based multislotclass support
+n				; High Multislotclass support
+0				; Geran Iu Mode capabilities
+n				; Multislot power profile
+0				; Multiple TBF Capability
+0 				; Downlink Advance Receiver Performance
+0				; Extended RLC/MAC Control Message Capability
+0				; DTM Enhancements Capability
+n                                ; DTM EGPRS High Multislot class
+0				; PS Handover Capability
+0				; DTM Handover Capability
+n     				; Multislot capability reduction for DLDC
+0				; Flexibile Time Slot Assignment
+0				; GAN PS Handover Capability
+0				; RLC Non-persistent Mode
+0				; Reduced Latency Capability
+0				; Uplink EGPRS2
+0				; Downlink EGPRS2
+0				; EUTRAN FDD SUPPORT
+1				; EUTRAN TDD Support
+0				; GERAN to E-UTRA support in GERAN
+0				; Priority Based reselection support
+x
+.
+ma E
+
+$paopen_900$
+msapp99 elg_open
+0                       ; See gmms.asn, msapp99.asn
+2                       ; ms in burst
+2                      ; burst count
+1000                     ; burst interval msec
+0                       ; primaries per ms
+0                       ; secondaries per primary
+y                       ; give attach type
+gprs-only                ; attach type
+y                       ; give ready timer
+two-secs                 ; timer unit
+20                       ; timer value
+y                       ; give ms network capab
+y                        ; give in plain format
+available                 ; gea-1
+mt-ptp-sms-supported      ; sm-capa-via-ded-ch
+mt-ptp-sms-supported      ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00                       ; screening-ind
+y                        ; give solsa
+me-does-not-support-solsa ; solsa
+y                        ; give revision level
+supporting-r99-or-later   ; revision level
+y                        ; give pfc feature mode
+bss-packet-flow-supported ; pfc-feature-mode
+n                        ; gea2
+n                        ; gea3
+n                        ; gea4
+n                        ; gea5
+n                        ; gea6
+n                        ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n                       ; no octet format parameter for network capability
+y                       ; give drx profile set
+y                        ; give first DRX elem
+1                         ; profile weight
+10                        ; split-pg-cycle
+t                         ; split-on-ccch
+3                         ; non-drx-timer
+y                         ; give drx-cycle-len
+6                          ; drx cycle len
+y                        ; give second DRX elem
+2                         ; profile weight
+1                         ; split-pg-cycle
+f                         ; split-on-ccch
+0                         ; non-drx-timer
+n                         ; no drx-cycle-len
+n                        ; no more DRX elems
+y                       ; give ms-ra-access-capa-set
+y                        ; give first MS RAC, up to 20
+1                         ; profile weight
+y                         ; give reduced plain format: AccessTechnologyType
+gsm-900-R                   ; access-technology-type
+class-1                    ; rf-power-capab
+y                          ; give a5 bits
+available                   ; a1 bit
+not-available               ; a2 bit
+not-available               ; a3 bit
+not-available               ; a4 bit
+not-available               ; a5 bit
+not-available               ; a6 bit
+not-available               ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present      ; ps
+no-vgcs-wanted             ; vgcs
+no-vbs-wanted              ; vbs
+y                          ; give multislot capability
+n                           ; give hscsd-multislot-class
+y                           ; give gprs-multislot-class
+6                            ; gprs-multislot-class
+y                           ; give gprs-extended-dynamic-support
+not-implemented              ; gprs-extended-dynamic-support
+y                           ; give ms-measurement-capab
+v-1-8-ts                     ; switch-measure-switch
+v-1-8-ts                     ; switch-measure
+y                           ; give ecsd-multislot-class
+6                            ; ecsd-multislot-class
+y                           ; give egprs-multislot-class
+6                            ; egprs-multislot-class
+y                           ; give egprs-extended-dynamic-support
+not-implemented              ; egprs-extended-dynamic-support
+n                           ; give dtm-support
+x
+.
+ma E
+
+
+
+$paopen$
+msapp99 elg_open
+0                       ; See gmms.asn, msapp99.asn
+1                       ; ms in burst
+100                      ; burst count
+5000                     ; burst interval msec
+0                       ; primaries per ms
+0                       ; secondaries per primary
+y                       ; give attach type
+gprs-only                ; attach type
+y                       ; give ready timer
+two-secs                 ; timer unit
+20                       ; timer value
+y                       ; give ms network capab
+y                        ; give in plain format
+available                 ; gea-1
+mt-ptp-sms-supported      ; sm-capa-via-ded-ch
+mt-ptp-sms-supported      ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00                       ; screening-ind
+y                        ; give solsa
+me-does-not-support-solsa ; solsa
+y                        ; give revision level
+supporting-r99-or-later   ; revision level
+y                        ; give pfc feature mode
+bss-packet-flow-supported ; pfc-feature-mode
+n                        ; gea2
+n                        ; gea3
+n                        ; gea4
+n                        ; gea5
+n                        ; gea6
+n                        ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n                       ; no octet format parameter for network capability
+y                       ; give drx profile set
+y                        ; give first DRX elem
+1                         ; profile weight
+10                        ; split-pg-cycle
+t                         ; split-on-ccch
+3                         ; non-drx-timer
+y                         ; give drx-cycle-len
+6                          ; drx cycle len
+y                        ; give second DRX elem
+2                         ; profile weight
+1                         ; split-pg-cycle
+f                         ; split-on-ccch
+0                         ; non-drx-timer
+n                         ; no drx-cycle-len
+n                        ; no more DRX elems
+y                       ; give ms-ra-access-capa-set
+y                        ; give first MS RAC, up to 20
+1                         ; profile weight
+y                         ; give reduced plain format: AccessTechnologyType
+gsm-900-R                   ; access-technology-type
+class-1                    ; rf-power-capab
+y                          ; give a5 bits
+available                   ; a1 bit
+not-available               ; a2 bit
+not-available               ; a3 bit
+not-available               ; a4 bit
+not-available               ; a5 bit
+not-available               ; a6 bit
+not-available               ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present      ; ps
+no-vgcs-wanted             ; vgcs
+no-vbs-wanted              ; vbs
+y                          ; give multislot capability
+n                           ; give hscsd-multislot-class
+y                           ; give gprs-multislot-class
+6                            ; gprs-multislot-class
+y                           ; give gprs-extended-dynamic-support
+not-implemented              ; gprs-extended-dynamic-support
+y                           ; give ms-measurement-capab
+v-1-8-ts                     ; switch-measure-switch
+v-1-8-ts                     ; switch-measure
+y                           ; give ecsd-multislot-class
+6                            ; ecsd-multislot-class
+y                           ; give egprs-multislot-class
+6                            ; egprs-multislot-class
+y                           ; give egprs-extended-dynamic-support
+not-implemented              ; egprs-extended-dynamic-support
+n                           ; give dtm-support
+x
+.
+ma E
+
+
+$elg1_actudp$
+msapp99 elg_actpdp
+
+1	;; nbr-of-ms-in-burst
+100	;; burst-interval
+100	;; percentage of MS to get PDP
+1	;; primaries for each MS
+2	;; secondaries for each primary
+y	;; give DGS profiles
+n	 ;; no idles
+n	 ;; no icmp
+n	 ;; no www
+n	 ;; no streaming udp
+n	 ;; no streaming tcp
+n	 ;; no email
+n	 ;; no mms
+y	 ;; yes elg test datagen
+1            		  ; profile weight
+y              		  ; first datagen elem
+1               	    ; weight
+ipv4            	    ; pdp type. next apn
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+f	  ;;  generator not in rnc
+n	  ;;  no icmp datagen
+y	  ;;  yes udp datagen . next primary target address
+10.21.36.68
+1		;; target address count
+23001		;; target port
+y		;; first ul packet profile
+100		 ;; packet length
+100		 ;; packet delay
+y		;; second ul packet profile
+300		  ;; packet length
+200		  ;; packet delay
+n		;; no more ul profiles
+2		;; ul packets in a burst
+y               ;; first dl packet profile
+1000		 ;; packet length
+300		 ;; packet delay
+y		;; second dl packet profile
+1600		  ;; packet length
+400		  ;; packet delay
+y		;; third dl packet profile
+200		  ;; packet length
+500		  ;; packet delay
+n		;; no more dl profiles
+3		;; dl packets in a burst
+y		;; give Datagen Controls
+y		 ;; give max waiting time (interval)
+5000		   ;; 5000 ms
+n		 ;; no packet count limit
+t		 ;; resend as soon as all expected packets have been received
+x  	  ;; no more datagen elems, stop asking
+.
+ma E
+
+$elg_dl_data$
+msapp99 elg_actpdp
+
+1       ;; nbr-of-ms-in-burst
+1000     ;; burst-interval
+100     ;; percentage of MS to get PDP
+1       ;; primaries for each MS
+0       ;; secondaries for each primary
+y       ;; give DGS profiles
+n        ;; no idles
+n        ;; no icmp
+n        ;; no www
+n        ;; no streaming udp
+n        ;; no streaming tcp
+n        ;; no email
+n        ;; no mms
+y        ;; yes elg test datagen
+1                         ; profile weight
+y                         ; first datagen elem
+1                           ; weight
+ipv4                        ; pdp type. next apn
+nokia.com
+high-priority               ; precedence
+streaming-class             ; traffic class
+no-delivery-order           ; delivery order
+no-detect                   ; delivery or erroneous sdus
+sdu-1510                    ; max sdu size
+kbps-50                     ; max ul bitrate
+kbps-80                     ; max dl bitrate
+five-minus-three            ; residual ber
+one-minus-four              ; sdu error ratio
+delay-110ms                 ; transfer delay
+kbps-40                     ; guaranteed ul bitrate (coded)
+kbps-40                     ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n                           ; Rel5 QoS
+n                           ; Rel7 QoS
+f                           ; collect statistics
+f         ;;  generator not in rnc
+n         ;;  no icmp datagen
+y         ;;  yes udp datagen . next primary target address
+10.21.36.68
+1               ;; target address count
+23001           ;; target port
+y               ;; first ul packet profile
+0              ;; packet length
+5000              ;; packet delay
+n               ;; no more ul profiles
+1               ;; ul packets in a burst
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+n               ;; no more dl profiles
+1               ;; dl packets in a burst
+y               ;; give Datagen Controls
+y                ;; give max waiting time (interval)
+150                ;; 500 ms
+n                ;; no packet count limit
+f                ;; resend as soon as all expected packets have been received
+x         ;; no more datagen elems, stop asking
+.
+ma E
+
+$elg_pausedata$
+msapp99 elg_pause
+1001
+
+ma E
+
+$elg_actpdp$
+msapp99 elg_actpdp
+
+1       ;; nbr-of-ms-in-burst
+1000     ;; burst-interval
+100     ;; percentage of MS to get PDP
+1       ;; primaries for each MS
+0       ;; secondaries for each primary
+y       ;; give DGS profiles
+n        ;; no idles
+n        ;; no icmp
+n        ;; no www
+n        ;; no streaming udp
+n        ;; no streaming tcp
+n        ;; no email
+n        ;; no mms
+y        ;; yes elg test datagen
+1                         ; profile weight
+y                         ; first datagen elem
+1                           ; weight
+ipv4                        ; pdp type. next apn
+nokia.com
+high-priority               ; precedence
+streaming-class             ; traffic class
+no-delivery-order           ; delivery order
+no-detect                   ; delivery or erroneous sdus
+sdu-1510                    ; max sdu size
+kbps-50                     ; max ul bitrate
+kbps-80                     ; max dl bitrate
+five-minus-three            ; residual ber
+one-minus-four              ; sdu error ratio
+delay-110ms                 ; transfer delay
+kbps-40                     ; guaranteed ul bitrate (coded)
+kbps-40                     ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n                           ; Rel5 QoS
+n                           ; Rel7 QoS
+f                           ; collect statistics
+f         ;;  generator not in rnc
+n         ;;  no icmp datagen
+y         ;;  yes udp datagen . next primary target address
+10.21.36.68
+1               ;; target address count
+23001           ;; target port
+y               ;; first ul packet profile
+0              ;; packet length
+5000              ;; packet delay
+n               ;; no more ul profiles
+1               ;; ul packets in a burst
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+N               ;; no more dl profiles
+1               ;; dl packets in a burst
+y               ;; give Datagen Controls
+y                ;; give max waiting time (interval)
+500                ;; 500 ms
+n                ;; no packet count limit
+f                ;; resend as soon as all expected packets have been received
+x         ;; no more datagen elems, stop asking
+
+msgHandler msapp99 -mmm2g_act_pdp_ctx_acc
+elg_pausedata
+
+
+ma E
+
+$elg_ul_data$
+msapp99 elg_actpdp
+
+1       ;; nbr-of-ms-in-burst
+1000     ;; burst-interval
+100     ;; percentage of MS to get PDP
+1       ;; primaries for each MS
+0       ;; secondaries for each primary
+y       ;; give DGS profiles
+n        ;; no idles
+n        ;; no icmp
+n        ;; no www
+n        ;; no streaming udp
+n        ;; no streaming tcp
+n        ;; no email
+n        ;; no mms
+y        ;; yes elg test datagen
+1                         ; profile weight
+y                         ; first datagen elem
+1                           ; weight
+ipv4                        ; pdp type. next apn
+nokia.com
+high-priority               ; precedence
+streaming-class             ; traffic class
+no-delivery-order           ; delivery order
+no-detect                   ; delivery or erroneous sdus
+sdu-1510                    ; max sdu size
+kbps-50                     ; max ul bitrate
+kbps-80                     ; max dl bitrate
+five-minus-three            ; residual ber
+one-minus-four              ; sdu error ratio
+delay-110ms                 ; transfer delay
+kbps-40                     ; guaranteed ul bitrate (coded)
+kbps-40                     ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n                           ; Rel5 QoS
+n                           ; Rel7 QoS
+f                           ; collect statistics
+f         ;;  generator not in rnc
+n         ;;  no icmp datagen
+y         ;;  yes udp datagen . next primary target address
+10.21.36.68
+1               ;; target address count
+23001           ;; target port
+y               ;; first ul packet profile
+450              ;; packet length
+500              ;; packet delay
+y               ;; no more ul profiles
+450              ;; packet length
+500              ;; packet delay
+y               ;; no more ul profiles
+450              ;; packet length
+500              ;; packet delay
+n               ;; no more ul profiles
+1               ;; ul packets in a burst
+y               ;; first dl packet profile
+0              ;; packet length
+5000              ;; packet delay
+n               ;; no more dl profiles
+1               ;; dl packets in a burst
+y               ;; give Datagen Controls
+y                ;; give max waiting time (interval)
+500                ;; 500 ms
+n                ;; no packet count limit
+f                ;; resend as soon as all expected packets have been received
+x         ;; no more datagen elems, stop asking
+.
+ma E
+
+
+
+$elg1_udp_data$
+msapp99 elg_actpdp
+
+1       ;; nbr-of-ms-in-burst
+1000     ;; burst-interval
+100     ;; percentage of MS to get PDP
+1       ;; primaries for each MS
+0       ;; secondaries for each primary
+y       ;; give DGS profiles
+n        ;; no idles
+n        ;; no icmp
+n        ;; no www
+n        ;; no streaming udp
+n        ;; no streaming tcp
+n        ;; no email
+n        ;; no mms
+y        ;; yes elg test datagen
+1                         ; profile weight
+y                         ; first datagen elem
+1                           ; weight
+ipv4                        ; pdp type. next apn
+nokia.com
+high-priority               ; precedence
+streaming-class             ; traffic class
+no-delivery-order           ; delivery order
+no-detect                   ; delivery or erroneous sdus
+sdu-1510                    ; max sdu size
+kbps-50                     ; max ul bitrate
+kbps-80                     ; max dl bitrate
+five-minus-three            ; residual ber
+one-minus-four              ; sdu error ratio
+delay-110ms                 ; transfer delay
+kbps-40                     ; guaranteed ul bitrate (coded)
+kbps-40                     ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n                           ; Rel5 QoS
+n                           ; Rel7 QoS
+f                           ; collect statistics
+f         ;;  generator not in rnc
+n         ;;  no icmp datagen
+y         ;;  yes udp datagen . next primary target address
+10.21.36.68
+1               ;; target address count
+23001           ;; target port
+y               ;; first ul packet profile
+450              ;; packet length
+500              ;; packet delay
+n               ;; no more ul profiles
+1               ;; ul packets in a burst
+y               ;; first dl packet profile
+450              ;; packet length
+500              ;; packet delay
+n               ;; no more dl profiles
+1               ;; dl packets in a burst
+y               ;; give Datagen Controls
+y                ;; give max waiting time (interval)
+500                ;; 500 ms
+n                ;; no packet count limit
+f                ;; resend as soon as all expected packets have been received
+x         ;; no more datagen elems, stop asking
+.
+ma E
+
+
+$elg1_acticmp$
+msapp99 elg_actpdp
+
+1	;; nbr-of-ms-in-burst
+100	;; burst-interval
+100	;; percentage of MS to get PDP
+1	;; primaries for each MS
+2	;; secondaries for each primary
+y	;; give DGS profiles
+n	 ;; no idles
+n	 ;; no icmp
+n	 ;; no www
+n	 ;; no streaming udp
+n	 ;; no streaming tcp
+n	 ;; no email
+n	 ;; no mms
+y	 ;; yes elg test datagen
+1            		  ; profile weight
+y              		  ; first datagen elem
+1               	    ; weight
+ipv4            	    ; pdp type. next apn
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n			    ; Rel7 QoS
+f			    ; collect statistics
+f	  ;;  generator not in rnc
+y	  ;; select icmp testdata
+10.10.10.10
+10	   ;; destination address count
+1000	   ;; ping size
+y          ;; give Datagen Controls
+y	   ;; give max waiting time (interval)
+1000	     ;; 1000 ms
+n	   ;; no packet count limit
+t	   ;; resend as soon as all expected packets have been received
+x  	  ;; no more datagen elems, stop asking
+.
+ma E
+
+$et$
+elgopen_template
+ma E
+
+$lt$
+set llcMs var test
+14411
+set llcMs var test_var1
+**
+set llcMs var test_var2
+**
+ma E
+
+
+$elgopen_template$
+msapp99 elg_open
+0			; See gmms.asn, msapp99.asn
+2			; ms in burst
+2			; burst count
+50			; burst interval msec
+0			; primaries per ms
+0			; secondaries per primary
+y			; give attach type
+gprs-only		 ; attach type
+y			; give ready timer
+two-secs		 ; timer unit
+20			 ; timer value
+y			; give ms network capab
+y			 ; give in plain format
+available		  ; gea-1
+mt-ptp-sms-supported	  ; sm-capa-via-ded-ch
+mt-ptp-sms-supported	  ; sm-capa-via-gprs-ch
+default-alphabet-preferred ; ucs2-support
+i00 			  ; screening-ind
+y			 ; give solsa
+me-does-not-support-solsa ; solsa
+y			 ; give revision level
+supporting-r99-or-later   ; revision level
+y			 ; give pfc feature mode
+bss-packet-flow-supported ; pfc-feature-mode
+n			 ; gea2
+n			 ; gea3
+n			 ; gea4
+n			 ; gea5
+n			 ; gea6
+n			 ; gea7
+n ; no lcs-va-capability
+n ; no ps-inter-rat-ho-from-geran-to-utran-iu-mode-capability
+n ; no ps-inter-rat-ho-from-geran-to-e-utran-s1-mode-capability
+n ; no emm-combined-procedures-capability
+n ; no isr-support
+n ; no srvcc-to-geran-utran-capability
+n ; no epc-capability
+n ; no nf-capability
+n			; no octet format parameter for network capability
+y			; give drx profile set
+y			 ; give first DRX elem
+1			  ; profile weight
+10			  ; split-pg-cycle
+t			  ; split-on-ccch
+3			  ; non-drx-timer
+y			  ; give drx-cycle-len
+6			   ; drx cycle len
+y			 ; give second DRX elem
+2			  ; profile weight
+1			  ; split-pg-cycle
+f			  ; split-on-ccch
+0			  ; non-drx-timer
+n			  ; no drx-cycle-len
+n			 ; no more DRX elems
+y			; give ms-ra-access-capa-set
+y			 ; give first MS RAC, up to 20
+1			  ; profile weight
+y			  ; give reduced plain format: AccessTechnologyType
+gsm-900-R		   ; access-technology-type
+class-1			   ; rf-power-capab
+y			   ; give a5 bits
+available		    ; a1 bit
+not-available		    ; a2 bit
+not-available		    ; a3 bit
+not-available		    ; a4 bit
+not-available		    ; a5 bit
+not-available		    ; a6 bit
+not-available		    ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present	   ; ps
+no-vgcs-wanted		   ; vgcs
+no-vbs-wanted		   ; vbs
+y			   ; give multislot capability
+y			    ; give hscsd-multislot-class
+6			     ; hscsd-multislot-class
+y			    ; give gprs-multislot-class
+10			     ; gprs-multislot-class
+y			    ; give gprs-extended-dynamic-support
+not-implemented		     ; gprs-extended-dynamic-support
+y			    ; give ms-measurement-capab
+v-1-8-ts		     ; switch-measure-switch
+v-1-8-ts		     ; switch-measure
+y			    ; give ecsd-multislot-class
+6			     ; ecsd-multislot-class
+y			    ; give egprs-multislot-class
+6			     ; egprs-multislot-class
+y			    ; give egprs-extended-dynamic-support
+not-implemented		     ; egprs-extended-dynamic-support
+y			    ; give dtm-support
+multislot-class-5-supported  ; dtm-gprs-multislot-class
+single-slot-dtm-not-supported ; single-slot-dtm-support
+y			     ; give dtm-egprs-multislot-class
+multislot-class-5-supported   ; multislot-class-5-supported
+n			 ; no psk8-power-capab
+compact-not-implemented  ; compact-capab
+rel99-onwards		 ; revision-level
+umts-fdd-not-support	 ; umts-fdd-capab
+umts-tdd-not-support	 ; umts-3-84-Mcps-tdd-capab
+cdma2000-not-support	 ; cdma2000-capab
+umts-tdd-not-support     ; umts-1-28-Mcps-tdd-capab
+geran-feature-package-not-support ; geran-feature-package-1
+n			 ; no extended dtm
+modulation-based-ms-class-not-supported ; modulation-based-support
+n			 ; high-multislot-capability
+geran-iu-mode-not-supported ; geran-iu-mode-capability
+n			 ; multislot-power-profile
+multi-tbf-support-no     ; rel6 multitbf
+darp-not-supported       ; rel6 darp
+extended-ctrl-msg-segmentation-support-no  ; rel6 rlc_mac segmenting
+dtm-enhancements-capability-support-no  ; rel6 dtm_enhancements
+y
+ext-dtm-multislotclass-bits-000
+n
+ms-does-not-support-ps-handover
+ms-does-not-support-dtm-handover
+n ; downlink-dual-carrier (if y, give multislot reduction and dldc for dtm)
+ms-does-not-support-flexible-timeslot-assignment
+ms-does-not-support-geran-or-utran-to-gan-ps-handover
+ms-does-not-support-rlc-non-persistent-mode
+ms-does-not-support-reduced-tti-and-fast-ack-nack-report
+ms-does-not-support-either-egprs2a-or-egprs2b-in-uplink
+ms-does-not-support-either-egprs2a-or-egprs2b-in-downlink
+e-utra-fdd-not-supported
+e-utra-tdd-not-supported
+none ; geran-to-e-utra-support-in-geran-packet-transfer-mode
+priority-based-cell-reselection-not-supported
+y			; give first additional-access-technologies
+y			 ; give first additional access technology
+gsm-1800		  ; access-technology-type
+class-1			  ; gmsk-power-class
+e1			  ; psk8-power-class
+n			; no more additional-access-technologies
+n		       ; no full octet format of this MS RAC included here
+y			 ; give second MS RAC
+1			  ; profile weight
+y			  ; give reduced plain format: AccessTechnologyType
+gsm-900-R		   ; access-technology-type
+class-1			   ; rf-power-capab
+y			   ; give a5 bits
+available		    ; a1 bit
+not-available		    ; a2 bit
+not-available		    ; a3 bit
+not-available		    ; a4 bit
+not-available		    ; a5 bit
+not-available		    ; a6 bit
+not-available		    ; a7 bit
+early-classmark-not-supported ; es-ind
+ps-capability-present	   ; ps
+no-vgcs-wanted		   ; vgcs
+no-vbs-wanted		   ; vbs
+y			   ; give multislot capability
+y			    ; give hscsd-multislot-class
+2			     ; hscsd-multislot-class
+y			    ; give gprs-multislot-class
+6			     ; gprs-multislot-class
+y			    ; give gprs-extended-dynamic-support
+not-implemented		     ; gprs-extended-dynamic-support
+y			    ; give ms-measurement-capab
+v-1-8-ts		     ; switch-measure-switch
+v-1-8-ts		     ; switch-measure
+y			    ; give ecsd-multislot-class
+2			     ; ecsd-multislot-class
+y			    ; give egprs-multislot-class
+2			     ; egprs-multislot-class
+y			    ; give egprs-extended-dynamic-support
+not-implemented		     ; egprs-extended-dynamic-support
+y			    ; give dtm-support
+multislot-class-5-supported  ; dtm-gprs-multislot-class
+single-slot-dtm-not-supported ; single-slot-dtm-support
+y			     ; give dtm-egprs-multislot-class
+multislot-class-5-supported   ; multislot-class-5-supported
+n			 ; no psk8-power-capab
+compact-not-implemented    ; compact-capab
+rel99-onwards		   ; revision-level
+umts-fdd-not-support	   ; umts-fdd-capab
+umts-tdd-not-support	   ; umts-3-84-Mcps-tdd-capab
+cdma2000-not-support	   ; cdma2000-capab
+umts-tdd-not-support       ; umts-1-28-Mcps-tdd-capab
+geran-feature-package-not-support ; geran-feature-package-1
+n			   ; no extended dtm
+modulation-based-ms-class-not-supported ; modulation-based-support
+n			 ; high-multislot-capability
+geran-iu-mode-not-supported ; geran-iu-mode-capability
+n			 ; multislot-power-profile
+multi-tbf-support-no
+darp-not-supported
+extended-ctrl-msg-segmentation-support-no
+dtm-enhancements-capability-support-no
+y
+ext-dtm-multislotclass-bits-000
+n
+ms-does-not-support-ps-handover
+ms-does-not-support-dtm-handover
+n ; downlink-dual-carrier (if y, give multislot reduction and dldc for dtm)
+ms-does-not-support-flexible-timeslot-assignment
+ms-does-not-support-geran-or-utran-to-gan-ps-handover
+ms-does-not-support-rlc-non-persistent-mode
+ms-does-not-support-reduced-tti-and-fast-ack-nack-report
+ms-does-not-support-either-egprs2a-or-egprs2b-in-uplink
+ms-does-not-support-either-egprs2a-or-egprs2b-in-downlink
+e-utra-fdd-not-supported
+e-utra-tdd-not-supported
+none ; geran-to-e-utra-support-in-geran-packet-transfer-mode
+priority-based-cell-reselection-not-supported
+y			  ; give first additional-access-technologies
+y			   ; give first additional access technology
+gsm-1800		    ; access-technology-type
+class-1			    ; gmsk-power-class
+e1			    ; psk8-power-class
+n			  ; no more additional-access-technologies
+n		         ; no full octet format of this MS RAC included here
+n			; no more MS RAC elems
+y            		; dgs profile set
+y             		 ; idle profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first idle elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+low-priority	   	    ; precedence
+background-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-3            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+y              		  ; second idle elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+low-priority	   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+n			   ; no more idle elems
+y             		 ; icmp profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first ICMP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n			    ; Rel7 QoS
+t			    ; collect statistics
+1000			    ; ping size
+200			    ; ping interval
+y              		  ; second ICMP elem
+0               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+1000			    ; ping size
+1000			    ; ping interval
+n			   ; no more ICMP elems
+y			  ; WWW profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first WWW elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+100			    ; time between sessions sec
+10			    ; requested page count in a session
+10			    ; embedded object count in a page
+5000			    ; www request size
+50000			    ; www reply size
+15			    ; reading time in secs
+y              		  ; second WWW elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+100			    ; time between sessions sec
+10			    ; requested page count in a session
+10			    ; embedded object count in a page
+5000			    ; www request size
+50000			    ; www reply size
+15			    ; reading time in secs
+n			   ; no more WW elems
+y			  ; STREAMING UDP profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first STREAMING UDP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n   			    ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+y              		  ; second STREAMING UDP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+n			   ; no more STREAMING UDP elems
+y			  ; STREAMING TCP profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first STREAMING TCP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n 			    ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+y              		  ; second STREAMING TCP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+n			   ; no more STREAMING TCP elems
+y			  ; EMAIL POP3 profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first EMAIL POP3 elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n			    ; Rel7 QoS
+f			    ; collect statistics
+40000			    ; email size
+30			    ; send interval in min
+30			    ; receive in min
+3			    ; check interval in min
+y              		  ; second EMAIL POP3 elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+40000			    ; email size
+30			    ; send interval in min
+30			    ; receive in min
+3			    ; check interval in min
+n			   ; no more EMAIL POP3 elems
+y			  ; MMS profile
+0            		  ; profile weight (disable simply with 0)
+y              		  ; first MMS elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n    		            ; Rel7 QoS
+f			    ; collect statistics
+4000			    ; mms size
+30			    ; send interval in min
+30			    ; receive in min
+y              		  ; second MMS elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+4000			    ; mms size
+30			    ; send interval in min
+30			    ; receive in min
+n			   ; no more MMS elems
+y	 		  ; OLD ELG TEST DATAGEN (not to be used with others)
+1            		  ; profile weight
+y              		  ; first OLD ELG TEST DATAGEN elem
+1               	    ; weight
+ipv4            	    ; pdp type. next apn
+nokia.com
+low-priority	   	    ; precedence
+background-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-3            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+f	  ;;  generator not in rnc
+y	  ;; select icmp testdata
+10.10.10.10
+10	   ;; destination address count
+1000	   ;; ping size
+y          ;; give Datagen Controls
+y	   ;; give max waiting time (interval)
+1000	     ;; 1000 ms
+n	   ;; no packet count limit
+t	   ;; resend as soon as all expected packets have been received
+x  	  ;; no more datagen elems, stop asking
+.
+ma E
+
+
+$elgactpdp_template$
+msapp99 elg_actpdp
+0			; See gmms.asn, msapp99.asn
+1			; mobile count in burst
+50			; burst interval msec
+100			; percentage of MS to get PDP
+1			; primaries per ms
+1			; secondaries per primary
+y            		; dgs profile set
+y             		 ; idle profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first idle elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+low-priority	   	    ; precedence
+background-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-3            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+y              		  ; second idle elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+n			   ; no more idle elems
+y             		 ; icmp profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first ICMP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+low-priority	   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-3            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+t			    ; collect statistics
+1000			    ; ping size
+1000			    ; ping interval
+y              		  ; second ICMP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+1000			    ; ping size
+1000			    ; ping interval
+n			   ; no more ICMP elems
+y			  ; WWW profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first WWW elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n 			    ; Rel7 QoS
+f			    ; collect statistics
+100			    ; time between sessions sec
+10			    ; requested page count in a session
+10			    ; embedded object count in a page
+5000			    ; www request size
+50000			    ; www reply size
+15			    ; reading time in secs
+y              		  ; second WWW elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+100			    ; time between sessions sec
+10			    ; requested page count in a session
+10			    ; embedded object count in a page
+5000			    ; www request size
+50000			    ; www reply size
+15			    ; reading time in secs
+n			   ; no more WW elems
+y			  ; STREAMING UDP profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first STREAMING UDP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n   		            ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+y              		  ; second STREAMING UDP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+n			   ; no more STREAMING UDP elems
+y			  ; STREAMING TCP profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first STREAMING TCP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n                           ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+y              		  ; second STREAMING TCP elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+streaming-class		    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+400			    ; packet size
+30			    ; packet interval
+n			   ; no more STREAMING TCP elems
+y			  ; EMAIL POP3 profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first EMAIL POP3 elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n                           ; Rel7 QoS
+f			    ; collect statistics
+40000			    ; email size
+30			    ; send interval in min
+30			    ; receive in min
+3			    ; check interval in min
+y              		  ; second EMAIL POP3 elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+40000			    ; email size
+30			    ; send interval in min
+30			    ; receive in min
+3			    ; check interval in min
+n			   ; no more EMAIL POP3 elems
+y			  ; MMS profile
+1            		  ; profile weight (disable simply with 0)
+y              		  ; first MMS elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n                           ; Rel7 QoS
+f			    ; collect statistics
+4000			    ; mms size
+30			    ; send interval in min
+30			    ; receive in min
+y              		  ; second MMS elem
+1               	    ; weight
+ipv4            	    ; pdp type
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-2            ; traffic handling priority
+n		            ; Rel5 QoS
+n		            ; Rel7 QoS
+f			    ; collect statistics
+4000			    ; mms size
+30			    ; send interval in min
+30			    ; receive in min
+n			   ; no more MMS elems
+y	 		  ; OLD ELG TEST DATAGEN (not to be used with others)
+0            		  ; profile weight
+y              		  ; first OLD ELG TEST DATAGEN elem
+1               	    ; weight
+ipv4            	    ; pdp type. next apn
+nokia.com
+high-priority   	    ; precedence
+interactive-class	    ; traffic class
+no-delivery-order	    ; delivery order
+no-detect		    ; delivery or erroneous sdus
+sdu-1510		    ; max sdu size
+kbps-50			    ; max ul bitrate
+kbps-80			    ; max dl bitrate
+five-minus-three	    ; residual ber
+one-minus-four		    ; sdu error ratio
+delay-110ms		    ; transfer delay
+kbps-40			    ; guaranteed ul bitrate (coded)
+kbps-40			    ; guaranteed dl bitrate (coded)
+priority-level-1            ; traffic handling priority
+n		            ; Rel5 QoS
+n	                    ; Rel7 QoS
+f			    ; collect statistics
+f	  ;;  generator not in rnc
+y	  ;; select icmp testdata
+10.10.10.10
+10	   ;; destination address count
+1000	   ;; ping size
+y          ;; give Datagen Controls
+y	   ;; give max waiting time (interval)
+1000	     ;; 1000 ms
+n	   ;; no packet count limit
+t	   ;; resend as soon as all expected packets have been received
+x  	  ;; no more datagen elems, stop asking
+.
+ma E
+
+$elgrs$
+msapp99 dgs_report_system
+0
+0		;; traffic class, 0 for all
+only-once	;; report interval in secs
+.
+ma E
+
+$elgstoprs$
+msapp99 dgs_stop_report_system
+0
+0		;; traffic class, 0 for all
+.
+ma E
+
+$elgrm$
+msapp99 dgs_report_model
+0
+1		;; ms index
+5		;; nsapi
+only-once	;; report interval in secs
+.
+ma E
+
+$elgstoprm$
+msapp99 dgs_stop_report_model
+0
+1		;; ms index
+5		;; nsapi
+.
+ma E
+
+$tri1dgsu$
+set tr dgsu sp i1
+ma E
+
+$tri2dgsu$
+set tr dgsu sp i2
+ma E
+
+$tri5dgsu$
+set tr dgsu sp i5
+ma E
+
+$delayperiodic10s$
+set msapp99 var test_delay_periodic_ms
+10000
+ma E
+
+$delayperiodic$
+set msapp99 var test_delay_periodic_ms
+**
+ma E
+
+$elglcs$
+msapp99 elg_lcs_molr
+0
+1				;; number of ms in burst
+5000				;; burst interval msec
+100				;; percent of mobiles for LCS
+1				;; invokeid
+0				;; trid
+0				;; molr-Type
+y				;; yes locationMethod
+3				;; locationMethod
+n
+y
+y
+\x915358870090F0
+n
+y
+\x915358600090F0
+n
+.
+ma E
+
+$elg_servreq$
+msapp99 elg_servreq
+0      ; dstCEPid (0)
+10     ; n-ms-in-burst
+50     ; t-burst-interval-msec
+100    ; ms-percent
+1      ; service-type (0=signalling, 1=data, 2=paging-response)
+0      ; how-many-servreq-per-mobile (0 = forever until elg_stop_servreq)
+.
+ma E
+
+$elg_stop_servreq$
+msapp99 elg_stop_servreq
+0      ; dstCEPid (0)
+.
+ma E
+
+$elgdereg$
+urlcIuma elg_urlc_iuma_dereg_req
+0	; dstCEPid
+
+1	; n-ms-in-burst
+1	; burst-count
+1000	; t-burst-interval-msec
+
+
+
+ma E
+
+$elgreg$
+urlcIuma elg_urlc_iuma_reg_req
+0	; dstCEPid
+
+1	; n-ms-in-burst
+1	; burst-count
+1000	; t-burst-interval-msec
+
+
+
+ma E
+
+$att_det_without_reg_dereg$
+set urlcIuma* var manual_reg_dereg
+1
+
+ma E
+

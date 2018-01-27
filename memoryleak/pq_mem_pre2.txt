@@ -1,0 +1,43 @@
+ssv
+
+/*** SYNTAX ERROR ***/
+/*** INVALID INFORMATION UNIT ***/
+
+/* IDENTIFY UNIT TYPE:
+   OMU ... OPERATION AND MAINTENANCE UNIT
+   MCMU .. MARKER AND CELLULAR MANAGEMENT UNIT
+   BCSU .. BASE STATION CONTROLLER SIGNALLING UNIT
+   ETPA .. EXCHANGE_TERMINAL FOR PACKET TRANSPORT OVER A-INTERFACE
+   ETPE .. EXCHANGE TERMINAL FOR PACKET OVER ETHERNET
+
+   DEFAULT IS OMU                                                                                                                                                                                                                                               */
+
+DDSS:dbu pq2
+
+/*** SYNTAX ERROR ***/
+/*** INVALID INFORMATION UNIT ***/
+
+/* IDENTIFY UNIT TYPE:
+   OMU ... OPERATION AND MAINTENANCE UNIT
+   MCMU .. MARKER AND CELLULAR MANAGEMENT UNIT
+   BCSU .. BASE STATION CONTROLLER SIGNALLING UNIT
+   ETPA .. EXCHANGE_TERMINAL FOR PACKET TRANSPORT OVER A-INTERFACE
+   ETPE .. EXCHANGE TERMINAL FOR PACKET OVER ETHERNET
+
+   DEFAULT IS OMU                                                                                                                                                                                                                                               */
+
+DDSS:dbu dsp:all
+
+/*** SYNTAX ERROR ***/
+/*** INVALID INFORMATION UNIT ***/
+
+/* IDENTIFY UNIT TYPE:
+   OMU ... OPERATION AND MAINTENANCE UNIT
+   MCMU .. MARKER AND CELLULAR MANAGEMENT UNIT
+   BCSU .. BASE STATION CONTROLLER SIGNALLING UNIT
+   ETPA .. EXCHANGE_TERMINAL FOR PACKET TRANSPORT OVER A-INTERFACE
+   ETPE .. EXCHANGE TERMINAL FOR PACKET OVER ETHERNET
+
+   DEFAULT IS OMU                                                                                                                                                                                                                                               */
+
+DDSS:

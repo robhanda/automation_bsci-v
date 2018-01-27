@@ -1,0 +1,75 @@
+buffer_size	buffer_initial		buffer_final	difference	result
+10			108772		108765		7		memory leak
+1682			77550		76167		1383		memory leak
+489			193005		193013		-8		memory leak
+70			175986		175987		-1		stable
+16			67498		67496		2		stable
+84			20380		20374		6		memory leak
+898			24992		25020		-28		memory leak
+240			539		534		5		memory leak
+4			30205		30203		2		stable
+2			10246		10245		1		stable
+15			9598		9592		6		memory leak
+256			1848		1856		-8		memory leak
+128			3537		3541		-4		memory leak
+23			148		149		-1		stable
+1			177		176		1		stable
+19			388		381		7		memory leak
+71			0		7		-7		memory leak
+2			203528		203526		2		stable
+8			373924		373921		3		memory leak
+1			1630		1629		1		stable
+1			4170		4169		1		stable
+1			4704		4703		1		stable
+256			1848		1856		-8		memory leak
+128			3537		3541		-4		memory leak
+10			172		168		4		memory leak
+13			388		387		1		stable
+1			1600		1599		1		stable
+1			602		601		1		stable
+1			602		601		1		stable
+1			495		494		1		stable
+1			172		171		1		stable
+74			0		4		-4		memory leak
+4			203528		203524		4		memory leak
+14			373924		373915		9		memory leak
+4			1630		1626		4		memory leak
+3			4170		4167		3		memory leak
+3			4704		4701		3		memory leak
+256			1848		1856		-8		memory leak
+128			3537		3541		-4		memory leak
+9			178		169		9		memory leak
+10			389		390		-1		stable
+10			169		170		-1		stable
+3			1600		1597		3		memory leak
+3			602		599		3		memory leak
+3			602		599		3		memory leak
+3			495		492		3		memory leak
+3			172		169		3		memory leak
+63			1		15		-14		memory leak
+1			1630		1629		1		stable
+256			1848		1856		-8		memory leak
+129			3537		3540		-3		memory leak
+1			177		176		1		stable
+10			172		168		4		memory leak
+16			388		384		4		memory leak
+1			602		601		1		stable
+71			0		7		-7		memory leak
+1			203528		203527		1		stable
+7			373924		373922		2		stable
+1			1630		1629		1		stable
+1			4704		4703		1		stable
+256			1848		1856		-8		memory leak
+128			3537		3541		-4		memory leak
+16			154		156		-2		stable
+1			178		177		1		stable
+8			391		392		-1		stable
+8			171		172		-1		stable
+1			1600		1599		1		stable
+1			602		601		1		stable
+1			602		601		1		stable
+1			495		494		1		stable
+1			172		171		1		stable
+56			15		22		-7		memory leak
+256			1848		1856		-8		memory leak
+128			3537		3541		-4		memory leak
